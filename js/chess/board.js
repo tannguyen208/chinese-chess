@@ -189,7 +189,7 @@ export default class Board extends EventTarget {
       img.addEventListener('dragover', pieceDragOver);
       img.addEventListener('drop', pieceDrop);
       img.addEventListener('dblclick', () => {
-        img.setAttribute('draggable', false);
+        img.setAttribute('draggable', !(img.getAttribute('draggable') === 'true'));
       });
       elImgs.appendChild(img);
       this.imgSquares.push(img);
@@ -253,7 +253,7 @@ export default class Board extends EventTarget {
     }
 
     // Board size
-    const PADDING_SPACER = 44;
+    const PADDING_SPACER = 0;
     this.element.style.width = width + PADDING_SPACER + 'px';
     this.element.style.height = height + PADDING_SPACER + 'px';
     this.element.style.maxWidth = this.element.style.width;
@@ -497,7 +497,8 @@ export default class Board extends EventTarget {
     this.busy = true; // Should have already happened, but stay busy until computer makes a move
     this.thinking.style.display = 'inline-block';
     let think = function () {
-      this.addMove(this.search.searchMain(LIMIT_DEPTH, this.millis), true);
+      let move = this.search.searchMain(LIMIT_DEPTH, this.millis);
+      this.addMove(move, true);
       this.thinking.style.display = 'none';
     }.bind(this);
     setTimeout(think, 250);

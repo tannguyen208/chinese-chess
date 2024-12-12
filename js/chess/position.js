@@ -474,7 +474,7 @@ Position.prototype.changeSide = function () {
 Position.prototype.makeMove = function (mv) {
   let zobristKey = this.zobristKey;
   this.movePiece(mv);
-  if (this.checked()) {
+  if (this.checked() || this.pieceImpossibleMove(mv)) {
     this.undoMovePiece(mv);
     return false;
   }
@@ -979,6 +979,8 @@ Position.prototype.bookMove = function () {
     lock = this.mirror().zobristLock >>> 1; // Convert into Unsigned
     index = binarySearch(book_dat, lock);
   }
+  console.log('Position:bookMove', index);
+
   if (index < 0) {
     return 0;
   }

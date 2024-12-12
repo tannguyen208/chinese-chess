@@ -447,6 +447,7 @@ body.chat #chat {
 
 #game {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
@@ -597,36 +598,36 @@ img[draggable='false'] {
 [data-rotate='enabled'] img {
   transform: rotate(180deg);
 }
-tr[data-pos],
-td[data-pos] {
-  position: relative;
-}
-tr[data-pos]:before {
-  content: attr(data-pos);
-  position: absolute;
-  right: -68px;
-  top: -12px;
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background: #fff;
-  padding: 4px;
-}
-tr[data-latest='true'] td::before,
-tr[data-latest='true'] td:last-child::after {
-  content: attr(data-pos);
-  position: absolute;
-  left: -12px;
-  bottom: -70px;
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background: #fff;
-  padding: 4px;
+
+.wrapper-game {
+  display: flex;
+  flex-direction: row;
 }
 
-tr[data-latest='true'] td:last-child::after {
-  content: '1';
-  left: unset;
-  right: -12px;
+.counter-rows {
+  display: flex;
+  flex-direction: row-reverse;
+  padding: 12px 31px;
+}
+.counter-rows div {
+  width: 57px;
+  text-align: left;
+  transform: translateX(-6px);
+}
+
+.counter-cols {
+  display: flex;
+  flex-direction: column-reverse;
+  padding: 31px 8px;
+}
+.counter-cols div {
+  height: 57px;
+  transform: translateY(-10px);
+}
+
+.counter-rows div b,
+.counter-cols div b {
+  background: rgb(195, 195, 195);
+  padding: 4px 8px;
+  border-radius: 50%;
 }
