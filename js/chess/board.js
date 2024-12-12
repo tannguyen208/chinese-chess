@@ -63,16 +63,6 @@ const PIECE_NAME = [
   'bp',
   null,
 ];
-const STARTUP_FEN = [
-  // TODO: custom
-  'rnbakabnr/9/1c5c1/2p1p1p2/p7p/P7P/2P1P1P2/1C5C1/9/RNBAKABNR',
-
-  // on UI
-  'rnbakabnr/9/1c5c1/p1p1p1p1p/9/9/P1P1P1P1P/1C5C1/9/RNBAKABNR w',
-  'rnbakabnr/9/1c5c1/p1p1p1p1p/9/9/P1P1P1P1P/1C5C1/9/RNBAKAB1R w',
-  'rnbakabnr/9/1c5c1/p1p1p1p1p/9/9/P1P1P1P1P/1C5C1/9/R1BAKAB1R w',
-  'rnbakabnr/9/1c5c1/p1p1p1p1p/9/9/9/1C5C1/9/RN2K2NR w',
-];
 
 function SQ_X(sq) {
   return FILE_X(sq) - 3;
@@ -83,7 +73,7 @@ function SQ_Y(sq) {
 }
 
 export default class Board extends EventTarget {
-  constructor(element, computer, online, handicap) {
+  constructor(element, computer, online, fen) {
     super();
     this.element = element;
 
@@ -91,7 +81,7 @@ export default class Board extends EventTarget {
     this.online = online;
 
     this.pos = new Position();
-    this.pos.fromFen(STARTUP_FEN[handicap]);
+    this.pos.fromFen(fen);
 
     this.animated = false;
     this.search = null;

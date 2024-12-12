@@ -38,6 +38,7 @@ const elPeerWait = document.getElementById('peerWait');
 const elSelFirstMove = document.getElementById('selFirstMove');
 const elSelHandicap = document.getElementById('selHandicap');
 const elSelSkill = document.getElementById('selSkill');
+const elSelFen = document.getElementById('selFen');
 const elBtnComputerStart = document.getElementById('btnComputerStart');
 
 // Chat
@@ -196,7 +197,14 @@ let main = function () {
   });
 
   elBtnComputerStart.addEventListener('click', function () {
-    board = new Board(elBoard, 1 - elSelFirstMove.selectedIndex, false, elSelHandicap.selectedIndex);
+    const STARTUP_FEN = [
+      'rnbakabnr/9/1c5c1/p1p1p1p1p/9/9/P1P1P1P1P/1C5C1/9/RNBAKABNR w',
+      'rnbakabnr/9/1c5c1/p1p1p1p1p/9/9/P1P1P1P1P/1C5C1/9/RNBAKAB1R w',
+      'rnbakabnr/9/1c5c1/p1p1p1p1p/9/9/P1P1P1P1P/1C5C1/9/R1BAKAB1R w',
+      'rnbakabnr/9/1c5c1/p1p1p1p1p/9/9/9/1C5C1/9/RN2K2NR w',
+    ];
+    const fen = elSelFen?.value || STARTUP_FEN[elSelHandicap.selectedIndex];
+    board = new Board(elBoard, 1 - elSelFirstMove.selectedIndex, false, fen);
     start(true, elSelSkill.selectedIndex);
     console.log({ board });
     hideModals();
